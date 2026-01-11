@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    environmet {
+    environment {
         IMAGE_NAME = rsakhamuri/jenkins-flask-app
     }
 
