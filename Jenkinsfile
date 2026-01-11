@@ -22,7 +22,7 @@ pipeline {
 
         stage('package') {
             steps {
-                echo "Packaging completed successfully."
+                echo "Packaging completed successfully again."
             }
         }
     }
