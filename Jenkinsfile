@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environmet {
+        IMAGE_NAME = rsakhamuri/jenkins-flask-app
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,21 +12,15 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Docker image') {
             steps {
-                echo "Build completed successfully."
+                sh 'docker build -t $IMAGE_NAME:latest .'
             }
         }
 
-        stage('Test') {
+        stage('docker image info') {
             steps {
-                echo "All tests passed successfully."
-            }
-        }
-
-        stage('package') {
-            steps {
-                echo "Packaging completed successfully this."
+                sh 'docker images | grep -i jenkins*'
             }
         }
     }
