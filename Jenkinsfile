@@ -2,25 +2,25 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = rsakhamuri/jenkins-flask-app
+        IMAGE_NAME = "yourdockerhubusername/jenkins-flask-app"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                echo "Code checkout completed successfully."
+                echo "Code checked out"
             }
         }
 
-        stage('Build Docker image') {
+        stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME:latest .'
             }
         }
 
-        stage('docker image info') {
+        stage('Docker Image Info') {
             steps {
-                sh 'docker images | grep -i jenkins*'
+                sh 'docker images | grep jenkins-flask-app'
             }
         }
     }
