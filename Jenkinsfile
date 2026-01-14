@@ -18,9 +18,21 @@ pipeline {
             }
         }
 
-        stage('Docker Image Info') {
+        stage('Docker Login') {
             steps {
-                sh 'docker images | grep jenkins-flask-app'
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                sh 'docker push $IMAGE_NAME:latest'
             }
         }
     }
