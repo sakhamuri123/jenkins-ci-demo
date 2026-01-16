@@ -34,7 +34,7 @@ pipeline {
         stage('Tag as latest') {
             steps {
                 sh 'docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest'
-                sh 'docer push $IMAGE_NAME:latest'
+                sh 'docker push $IMAGE_NAME:latest'
             }
         }
     }
