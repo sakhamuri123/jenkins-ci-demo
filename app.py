@@ -1,1 +1,1 @@
-return "Hello from feature branch. This is for PR"
+return "Hello from PR testing flow!"
