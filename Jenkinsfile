@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Push versioned image') {
+        stage('Push versioned image to Docker Hub') {
             steps {
                 sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
             }
