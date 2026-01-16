@@ -3,18 +3,13 @@ pipeline {
 
     environment {
         IMAGE_NAME = "rsakhamuri/jenkins-flask-app-new"
+        IMAGE_TAG = "build-${BUILD_NUMBER}"
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo "Code checked out"
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
             }
         }
 
@@ -30,9 +25,16 @@ pipeline {
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Push versioned image') {
             steps {
-                sh 'docker push $IMAGE_NAME:latest'
+                sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
+            }
+        }
+
+        stage('Tag as latest') {
+            steps {
+                sh 'docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest'
+                sh 'docer push $IMAGE_NAME:latest'
             }
         }
     }
