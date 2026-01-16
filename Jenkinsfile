@@ -50,5 +50,11 @@ pipeline {
                 '''
             }
         }
+
+        stage("only feature branch message") {
+            steps {
+                echo "This stage runs only on the feature branch"
+            }
+        }
     }
 }
