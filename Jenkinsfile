@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Update Latest Tag') {
+        stage('Update Latest Tag and push to Docker Hub') {
             steps {
                 sh 'docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest'
                 sh 'docker push $IMAGE_NAME:latest'
