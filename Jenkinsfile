@@ -40,6 +40,9 @@ pipeline {
         }
 
         stage('Deploy locally') {
+            when {
+                branch 'main'
+            }
             steps {
                 sh '''
                 docker rm -f $CONTAINER_NAME || true
